@@ -44,13 +44,13 @@
     <p class="verdict pending" id="v-gz">waiting…</p>
     <div class="player" id="p-gz"
          data-ksl-trace="clinic.atf.gz"
-         data-ksl-layout="clinic.lay.toml"></div>
+         data-ksl-layout="clinic.lay.json"></div>
 
     <h2>2 — uncompressed (<code>clinic.atf</code>, 102 KB)</h2>
     <p class="verdict pending" id="v-raw">waiting…</p>
     <div class="player" id="p-raw"
          data-ksl-trace="clinic.atf"
-         data-ksl-layout="clinic.lay.toml"></div>
+         data-ksl-layout="clinic.lay.json"></div>
 
     <h2>What the page decided</h2>
     <p class="verdict pending" id="v-all">waiting…</p>
@@ -58,37 +58,33 @@
 
 <script src="../assets/ksl-animation.js"></script>
 <script>
-    // A player that loaded draws to a canvas it created inside its mount point; one that failed leaves the
-    // element empty or shows an error in its status line. Checking for the canvas is the least clever test
-    // available, which is what a spike wants.
-    function drew(id) {
-        var el = document.getElementById(id);
-        var c = el && el.querySelector('canvas');
-        if (!c || !c.width || !c.height) return false;
-        var d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
-        for (var i = 0; i < d.length; i += 4) {
-            if (d[i] < 250 || d[i + 1] < 250 || d[i + 2] < 250) return true; // something other than blank
-        }
-        return false;
+    // Ask the player what happened, rather than inspecting pixels. The first attempt at this counted
+    // non-white canvas pixels and reported success over two outright failures: an untouched canvas is
+    // transparent BLACK, so every pixel read as "not white". The player already writes a status line --
+    // "<description> - N entities, ..." on success, "error: ..." on failure -- and its own account of
+    // itself is both more accurate and more legible than anything inferred from the bitmap.
+    function verdict(id) {
+        var text = (document.getElementById(id).innerText || '').replace(/\s+/g, ' ').trim();
+        if (/error:/i.test(text)) return { ok: false, why: text.slice(text.search(/error:/i), 200) };
+        if (/loading|waiting/i.test(text) || text === '') return { ok: false, why: 'never finished loading' };
+        return { ok: true, why: text.slice(-90) };
     }
 
-    function say(id, ok, okText, badText) {
+    function say(id, v, label) {
         var el = document.getElementById(id);
-        el.textContent = ok ? '✓ ' + okText : '✗ ' + badText;
-        el.className = 'verdict ' + (ok ? 'pass' : 'fail');
+        el.textContent = (v.ok ? '\u2713 ' + label + ' - ' : '\u2717 ') + v.why;
+        el.className = 'verdict ' + (v.ok ? 'pass' : 'fail');
     }
 
-    // Generous: the traces are small, but a cold Pages fetch plus decompression plus the first frame is
-    // still several hundred milliseconds, and a false negative here would be worse than waiting.
     setTimeout(function () {
-        var gz = drew('p-gz'), raw = drew('p-raw');
-        say('v-gz', gz, 'played — the browser decompressed it', 'did not play');
-        say('v-raw', raw, 'played', 'did not play');
+        var gz = verdict('p-gz'), raw = verdict('p-raw');
+        say('v-gz', gz, 'played, so the browser decompressed it');
+        say('v-raw', raw, 'played');
 
         var el = document.getElementById('v-all'), cls = 'verdict ', msg;
-        if (gz && raw) { cls += 'pass'; msg = '✓ Serve traces gzipped. Proceed as planned — the gallery costs about 4 MB.'; }
-        else if (raw)  { cls += 'fail'; msg = '✗ Pages is decompressing .gz for us. Fall back to uncompressed traces (39 MB) or a different extension.'; }
-        else           { cls += 'fail'; msg = '✗ Neither played — the spike itself is broken, so this says nothing about Pages. Check the console.'; }
+        if (gz.ok && raw.ok)  { cls += 'pass'; msg = '\u2713 Serve traces gzipped. Proceed as planned - the gallery costs about 4 MB.'; }
+        else if (raw.ok)      { cls += 'fail'; msg = '\u2717 Pages is decompressing .gz for us. Fall back to uncompressed traces (39 MB) or a different extension.'; }
+        else                  { cls += 'fail'; msg = '\u2717 Neither played, so this says nothing about Pages - the spike itself is at fault.'; }
         el.textContent = msg;
         el.className = cls;
     }, 4000);

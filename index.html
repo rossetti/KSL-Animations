@@ -1,17 +1,22 @@
 <!doctype html>
 <!--
-  Placeholder landing page.
+  The landing page. Hand-authored; the build never touches this file.
 
-  Its job is to be real enough to switch GitHub Pages on and confirm the site serves — the brand mark,
-  the stylesheet and a relative asset path all being exercised here. Phase 4 of the plan replaces it with
-  the written landing page; this file is hand-authored and the build never touches it.
+  The hero is a live player, not a picture, because the page's central claim is that these are real runs
+  rather than recordings — and the quickest way to make that claim is to let a reader press pause on it.
+  The transport bar stays visible for the same reason.
+
+  The drive-through pharmacy is the model here on purpose: 79 KB, starts instantly, and a queue with a
+  server is legible in about two seconds to somebody who has never seen a simulation. The warehouse and the
+  STEM fair are better animations and worse introductions.
 -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KSL Animations</title>
-    <meta name="description" content="Browser-playable animations of Kotlin Simulation Library models.">
+    <title>KSL Animations — watch a simulation actually run</title>
+    <meta name="description"
+          content="Browser-playable animations of Kotlin Simulation Library models: queues, conveyors, vehicles and agents, drawn from real simulation runs.">
     <link rel="icon" href="assets/branding/ksl-mark.svg">
     <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -21,51 +26,126 @@
     <div class="wrap">
         <a href="./"><img src="assets/branding/ksl-logo.svg" alt="KSL — Kotlin Simulation Library"></a>
         <nav class="site">
+            <a href="gallery.html">All animations</a>
             <a href="https://github.com/rossetti/KSL">KSL on GitHub</a>
         </nav>
     </div>
 </header>
 
-<main class="wrap">
-    <h1>KSL Animations</h1>
+<main class="wrap hero">
+    <h1>Watch a simulation actually run</h1>
     <hr class="rule">
 
     <p class="lede">
-        Watch discrete-event simulation models actually run — queues filling, parts riding conveyors,
-        vehicles routing around a congested aisle — in your browser, with nothing to install.
+        A discrete-event model is usually a table of numbers at the end of a run. It doesn't have to be.
+        Every animation on this site is a real KSL run, replayed in your browser — no install, no plugin,
+        no video.
     </p>
 
-    <p>
-        Every animation published here is a real run of a real model from the
-        <a href="https://github.com/rossetti/KSL">Kotlin Simulation Library</a>. Nothing is a screen
-        recording. The page loads the same trace file the desktop animation application loads, and draws it
-        through the same renderer, so what you see here is what the application shows.
+    <div class="player"
+         data-ksl-trace="traces/Example01DriveThroughPharmacy.atf.gz"
+         data-ksl-layout="traces/Example01DriveThroughPharmacy.lay.json"
+         data-ksl-autoplay="true"
+         data-ksl-loop="true"></div>
+
+    <p class="caption">
+        A drive-through pharmacy: cars arrive, wait in one line, and are served by whichever pharmacist is
+        free. Press pause — it is a simulation being replayed, not a clip.
     </p>
 
-    <h2>Coming shortly</h2>
-    <div class="notice">
-        <p>
-            The gallery is being assembled: fifteen worked examples covering process models, conveyors,
-            movable resources, and agents moving through grids and continuous space.
-        </p>
+    <div class="actions">
+        <a class="btn primary" href="gallery.html">Browse all 15 animations</a>
+        <a class="btn" href="https://github.com/rossetti/KSL">Get KSL</a>
     </div>
 
-    <h2>In the meantime</h2>
+    <h2>It is the model you already wrote</h2>
     <p>
-        The animation application ships with the KSL suite, and the
-        <a href="https://github.com/rossetti/KSL/blob/main/docs/guides/apps/animation.md">animation guide</a>
-        walks through capturing a trace from a model you have already written and laying it out.
+        Animation is not a second implementation of your simulation. You do not describe the picture to the
+        simulator or the simulator to the picture. Capture is a flag on a run: the model executes exactly as
+        it always did and writes down what happened, and everything on this site is drawn from those
+        recordings afterwards.
     </p>
+    <p>
+        That matters more than it sounds. An animation built by hand can disagree with the model, and when
+        it does, it lies convincingly. One replayed from the run cannot.
+    </p>
+
+    <h2>Three steps</h2>
+    <div class="grid">
+        <div class="step">
+            <span class="num" aria-hidden="true">Step one</span>
+            <h3>Capture</h3>
+            <p>
+                Run the model with capture switched on. It writes a trace — every arrival, seize, move and
+                release, with the time it happened.
+            </p>
+        </div>
+        <div class="step">
+            <span class="num" aria-hidden="true">Step two</span>
+            <h3>Lay it out</h3>
+            <p>
+                A layout says where a queue sits and what color an entity is. You do not start from a blank
+                canvas: the app derives one from the trace, and you adjust what it guessed.
+            </p>
+        </div>
+        <div class="step">
+            <span class="num" aria-hidden="true">Step three</span>
+            <h3>Replay</h3>
+            <p>
+                Scrub, pause, slow it down, run it back. The trace is a file — keep it, send it to a
+                student, open it again next year.
+            </p>
+        </div>
+    </div>
+
+    <h2>The same picture in two places</h2>
+    <p>
+        The desktop application and this website draw through one renderer over one trace format. A page
+        here is not an export or an approximation of what the app shows; it is the same drawing code reading
+        the same file. Each animation below offers its trace for download, so you can open it in the app and
+        lay it out yourself.
+    </p>
+
+    <h2>What it can draw</h2>
+    <div class="grid">
+        <div>
+            <h3>Queues and resources</h3>
+            <p>Lines forming and clearing, servers busy and idle, blocking when a buffer fills.</p>
+        </div>
+        <div>
+            <h3>Movement</h3>
+            <p>Parts on conveyors, workers carrying loads, vehicles routing around congestion.</p>
+        </div>
+        <div>
+            <h3>Agents in space</h3>
+            <p>Crowds through doorways, epidemics across a grid, flocking on a world whose edges join.</p>
+        </div>
+        <div>
+            <h3>Live statistics</h3>
+            <p>Charts and counters that advance with the run, beside the thing they are counting.</p>
+        </div>
+    </div>
+
+    <h2>Have a look</h2>
+    <p>
+        Fifteen worked examples, from a single queue to a warehouse of bidding vehicles. Each one says what
+        it is and what to watch for while it plays.
+    </p>
+    <div class="actions">
+        <a class="btn primary" href="gallery.html">All 15 animations</a>
+    </div>
 </main>
 
 <footer class="site">
     <div class="wrap">
         <p>
-            Produced by the <a href="https://github.com/rossetti/KSL">Kotlin Simulation Library</a>.
-            Free software under the <a href="LICENSE.txt">GNU General Public License v3</a>.
+            Produced by the <a href="https://github.com/rossetti/KSL">Kotlin Simulation Library</a>, by
+            Manuel D. Rossetti. Free software under the
+            <a href="LICENSE.txt">GNU General Public License v3</a>.
         </p>
     </div>
 </footer>
 
+<script src="assets/ksl-animation.js"></script>
 </body>
 </html>

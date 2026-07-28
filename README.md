@@ -43,7 +43,7 @@ From a [KSL](https://github.com/rossetti/KSL) checkout beside this one:
 Then review the diff here, commit and push. The site is rebuilt when the animations change, which in
 practice means alongside a KSL suite release rather than on a cadence of its own.
 
-## Licence
+## License
 
 GPL-3.0, the same as KSL itself — see [LICENSE.txt](LICENSE.txt). That covers the animation player
 (`assets/ksl-animation.js`) shipped here, which is compiled from KSL sources.

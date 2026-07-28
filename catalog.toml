@@ -16,12 +16,12 @@ watchFor = "Nothing moves. Position carries no meaning here — only occupancy. 
 [[animation]]
 id = "Example02MovingParts"
 blurb = "A part walks from the entrance to each station in turn, and out again."
-watchFor = "The dots on the grey lines are parts in transit, interpolated along the straight line between the coordinates each move reported. The lines themselves were not drawn by hand: they are the routes parts actually took, read off the trace."
+watchFor = "The dots on the gray lines are parts in transit, interpolated along the straight line between the coordinates each move reported. The lines themselves were not drawn by hand: they are the routes parts actually took, read off the trace."
 
 [[animation]]
 id = "Example03GridEpidemic"
 blurb = "A susceptible-infected-recovered epidemic spreading across a 20×20 grid whose edges wrap."
-watchFor = "Colour is the state of an individual, not its identity. Watch infection cross the seam at the edge of the grid — on a torus the far side is a neighbour, so an outbreak that reaches the boundary does not stop there."
+watchFor = "Color is the state of an individual, not its identity. Watch infection cross the seam at the edge of the grid — on a torus the far side is a neighbor, so an outbreak that reaches the boundary does not stop there."
 
 [[animation]]
 id = "Example04BuildingEvacuation"
@@ -31,12 +31,12 @@ watchFor = "The dark cells are blocked and the agents path around them. Nobody t
 [[animation]]
 id = "Example05PedestrianCrowd"
 blurb = "A crowd emptying a room through a doorway three cells wide."
-watchFor = "The green-to-red wash is the flow field — the model's own gradient towards the exit, with green near it. The crowding at the door is not scripted; it is what happens when everyone follows that gradient at once."
+watchFor = "The green-to-red wash is the flow field — the model's own gradient toward the exit, with green near it. The crowding at the door is not scripted; it is what happens when everyone follows that gradient at once."
 
 [[animation]]
 id = "Example06WarehouseAGV"
 blurb = "Four automated guided vehicles share one warehouse floor. A task is announced, the vehicles bid for it, and the winner fetches the pallet."
-watchFor = "The amber aisle is congested — passable, but four times the cost to cross. Watch the blue routes prefer the western cross-aisle instead. That is the grid's cell costs deciding, not the drawing. Colour shows what a vehicle is doing rather than which one it is."
+watchFor = "The amber aisle is congested — passable, but four times the cost to cross. Watch the blue routes prefer the western cross-aisle instead. That is the grid's cell costs deciding, not the drawing. Color shows what a vehicle is doing rather than which one it is."
 
 [[animation]]
 id = "Example08ConveyorTandem"

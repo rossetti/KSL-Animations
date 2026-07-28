@@ -13,7 +13,7 @@
       "id": "Example02MovingParts",
       "title": "Moving parts — walking between two stations",
       "blurb": "A part walks from the entrance to each station in turn, and out again.",
-      "watchFor": "The dots on the grey lines are parts in transit, interpolated along the straight line between the coordinates each move reported. The lines themselves were not drawn by hand: they are the routes parts actually took, read off the trace.",
+      "watchFor": "The dots on the gray lines are parts in transit, interpolated along the straight line between the coordinates each move reported. The lines themselves were not drawn by hand: they are the routes parts actually took, read off the trace.",
       "page": "a/Example02MovingParts.html",
       "trace": "traces/Example02MovingParts.atf.gz",
       "traceBytes": 18311
@@ -22,7 +22,7 @@
       "id": "Example03GridEpidemic",
       "title": "SIR epidemic on a 20x20 grid torus",
       "blurb": "A susceptible-infected-recovered epidemic spreading across a 20×20 grid whose edges wrap.",
-      "watchFor": "Colour is the state of an individual, not its identity. Watch infection cross the seam at the edge of the grid — on a torus the far side is a neighbour, so an outbreak that reaches the boundary does not stop there.",
+      "watchFor": "Color is the state of an individual, not its identity. Watch infection cross the seam at the edge of the grid — on a torus the far side is a neighbor, so an outbreak that reaches the boundary does not stop there.",
       "page": "a/Example03GridEpidemic.html",
       "trace": "traces/Example03GridEpidemic.atf.gz",
       "traceBytes": 37846
@@ -40,7 +40,7 @@
       "id": "Example05PedestrianCrowd",
       "title": "Crowd evacuating a room through a three-cell doorway",
       "blurb": "A crowd emptying a room through a doorway three cells wide.",
-      "watchFor": "The green-to-red wash is the flow field — the model's own gradient towards the exit, with green near it. The crowding at the door is not scripted; it is what happens when everyone follows that gradient at once.",
+      "watchFor": "The green-to-red wash is the flow field — the model's own gradient toward the exit, with green near it. The crowding at the door is not scripted; it is what happens when everyone follows that gradient at once.",
       "page": "a/Example05PedestrianCrowd.html",
       "trace": "traces/Example05PedestrianCrowd.atf.gz",
       "traceBytes": 360966
@@ -49,7 +49,7 @@
       "id": "Example06WarehouseAGV",
       "title": "Warehouse AGVs — bidding, fetching, charging",
       "blurb": "Four automated guided vehicles share one warehouse floor. A task is announced, the vehicles bid for it, and the winner fetches the pallet.",
-      "watchFor": "The amber aisle is congested — passable, but four times the cost to cross. Watch the blue routes prefer the western cross-aisle instead. That is the grid's cell costs deciding, not the drawing. Colour shows what a vehicle is doing rather than which one it is.",
+      "watchFor": "The amber aisle is congested — passable, but four times the cost to cross. Watch the blue routes prefer the western cross-aisle instead. That is the grid's cell costs deciding, not the drawing. Color shows what a vehicle is doing rather than which one it is.",
       "page": "a/Example06WarehouseAGV.html",
       "trace": "traces/Example06WarehouseAGV.atf.gz",
       "traceBytes": 105084

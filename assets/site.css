@@ -6,7 +6,7 @@
  * The palette is the KSL brand palette, taken from docs/branding/README.md in the KSL repository, and the
  * names are the ones used there so the two can be compared without translation. Light only, by decision:
  * the animation canvas renders on white in both the desktop viewer and the browser, and the example
- * layouts were coloured against white, so a dark page around a white canvas would misrepresent the thing
+ * layouts were colored against white, so a dark page around a white canvas would misrepresent the thing
  * it is framing.
  *
  * No web fonts. The system stack renders immediately, costs no request, and reaches no third party.
@@ -119,11 +119,76 @@ a { color: var(--indigo); }
 .notice :first-child { margin-top: 0; }
 .notice :last-child { margin-bottom: 0; }
 
+/* ── landing page ───────────────────────────────────────────────────────────────────────────────── */
+
+.hero { padding-top: 1rem; }
+
+.hero h1 { max-width: 20ch; }
+
+/* Sits under the hero player: what the reader is looking at, in one line. */
+.caption {
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: var(--measure);
+}
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 1.75rem 0 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid var(--indigo);
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--indigo);
+    background: var(--paper);
+}
+
+.btn:hover { background: #EEF2FF; }
+
+.btn.primary { background: var(--indigo); color: #fff; }
+.btn.primary:hover { background: var(--deep); border-color: var(--deep); }
+
+/* Three steps, or a handful of capabilities: the same grid serves both. */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.grid h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+    color: var(--deep);
+}
+
+.grid p { margin: 0; max-width: none; font-size: 0.95rem; }
+
+/* A numbered step in the pipeline. The number is decoration, so it is hidden from a screen reader. */
+.step .num {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.35rem;
+}
+
 /* ── the animation ──────────────────────────────────────────────────────────────────────────────── */
 
 /*
  * The canvas renders on white in both the desktop viewer and the browser, and the example layouts were
- * coloured against white. So the animation is framed as a sheet it sits on rather than being blended into
+ * colored against white. So the animation is framed as a sheet it sits on rather than being blended into
  * the page — the frame says "this is the model", and keeps that surface honest whatever the page around it
  * does later.
  */

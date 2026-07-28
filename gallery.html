@@ -1,0 +1,89 @@
+<!doctype html>
+<!--
+  Hand-authored. The build never writes this file.
+
+  The cards are built from animations.json, which the generator writes, so adding a sixteenth model means
+  writing a blurb in catalog.toml and regenerating — not editing this page. Posters come later; until then a
+  card carries its title and blurb, which is enough to choose by.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All animations — KSL Animations</title>
+    <meta name="description" content="Every published KSL simulation animation, playable in the browser.">
+    <link rel="icon" href="assets/branding/ksl-mark.svg">
+    <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="site">
+    <div class="wrap">
+        <a href="./"><img src="assets/branding/ksl-logo.svg" alt="KSL — Kotlin Simulation Library"></a>
+        <nav class="site">
+            <a href="https://github.com/rossetti/KSL">KSL on GitHub</a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <h1>All animations</h1>
+    <hr class="rule">
+    <p class="lede">
+        Every one is a real run of a real model. Pick one and it plays in the browser — nothing to install,
+        and only that animation's trace is fetched.
+    </p>
+
+    <div class="cards" id="cards">
+        <noscript>
+            <p class="notice">
+                This index is built from <a href="animations.json">animations.json</a>, which needs
+                JavaScript to render. The animations themselves are under <code>a/</code>.
+            </p>
+        </noscript>
+    </div>
+</main>
+
+<footer class="site">
+    <div class="wrap">
+        <p>
+            Produced by the <a href="https://github.com/rossetti/KSL">Kotlin Simulation Library</a>.
+            Free software under the <a href="LICENSE.txt">GNU General Public License v3</a>.
+        </p>
+    </div>
+</footer>
+
+<script>
+    fetch('animations.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            var host = document.getElementById('cards');
+            data.animations.forEach(function (a) {
+                var card = document.createElement('a');
+                card.className = 'card';
+                card.href = a.page;
+
+                var h = document.createElement('h2');
+                h.textContent = a.title;
+
+                var p = document.createElement('p');
+                p.textContent = a.blurb;
+
+                var size = document.createElement('p');
+                size.className = 'meta';
+                size.textContent = Math.round(a.traceBytes / 1024) + ' KB';
+
+                card.appendChild(h);
+                card.appendChild(p);
+                card.appendChild(size);
+                host.appendChild(card);
+            });
+        })
+        .catch(function () {
+            document.getElementById('cards').innerHTML =
+                '<p class="notice">Could not load the animation index. The animations are under <code>a/</code>.</p>';
+        });
+</script>
+
+</body>
+</html>

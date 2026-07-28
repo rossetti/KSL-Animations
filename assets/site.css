@@ -137,6 +137,41 @@ a { color: var(--indigo); }
     overflow: hidden;
 }
 
+/* ── gallery cards ──────────────────────────────────────────────────────────────────────────────── */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.card {
+    display: block;
+    padding: 1.25rem 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color .12s ease, transform .12s ease;
+}
+
+.card:hover {
+    border-color: var(--indigo);
+    transform: translateY(-2px);
+}
+
+/* The heading is a card title here, not a section break, so it drops the page-level spacing. */
+.card h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--indigo);
+}
+
+.card p { margin: 0; max-width: none; font-size: 0.95rem; color: var(--ink); }
+.card .meta { margin-top: 0.75rem; font-size: 0.8rem; color: var(--muted); }
+
 /* ── previous / next ────────────────────────────────────────────────────────────────────────────── */
 
 nav.pager {

@@ -119,6 +119,43 @@ a { color: var(--indigo); }
 .notice :first-child { margin-top: 0; }
 .notice :last-child { margin-bottom: 0; }
 
+/* ── the animation ──────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * The canvas renders on white in both the desktop viewer and the browser, and the example layouts were
+ * coloured against white. So the animation is framed as a sheet it sits on rather than being blended into
+ * the page — the frame says "this is the model", and keeps that surface honest whatever the page around it
+ * does later.
+ */
+.player {
+    height: min(70vh, 560px);
+    min-height: 380px;
+    margin: 1.75rem 0 2.5rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ── previous / next ────────────────────────────────────────────────────────────────────────────── */
+
+nav.pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-weight: 600;
+}
+
+/* Keeps a lone "next" hard right when there is no "previous" — the first animation in the set. */
+nav.pager .next:only-child { margin-left: auto; }
+
+nav.pager a { text-decoration: none; max-width: 22rem; }
+nav.pager a:hover { text-decoration: underline; }
+
 /* ── footer ─────────────────────────────────────────────────────────────────────────────────────── */
 
 footer.site {

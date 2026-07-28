@@ -1,0 +1,84 @@
+# The editorial half of the gallery: what each animation is, and what to look at while it plays.
+#
+# Hand-written. The build reads this and never writes it. Every model the animation bundle ships needs an
+# entry here or `buildAnimationSite` refuses to run — a published animation with nothing to say about it is
+# worse than one not published yet.
+#
+#   id        the model id, matching the bundle manifest and the layout file name
+#   blurb     one or two sentences: what this is. Shown on the gallery card and under the title.
+#   watchFor  what a reader should actually look at. Optional, but it is the part that teaches.
+
+[[animation]]
+id = "Example01DriveThroughPharmacy"
+blurb = "The smallest interesting queueing model: cars arrive, wait in one line, and are served by whichever pharmacist is free."
+watchFor = "Nothing moves. Position carries no meaning here — only occupancy. A red cell is a pharmacist serving a car, green is one free, and the line to the left is the queue. This is what a process-view model looks like when the animation is about state rather than travel."
+
+[[animation]]
+id = "Example02MovingParts"
+blurb = "A part walks from the entrance to each station in turn, and out again."
+watchFor = "The dots on the grey lines are parts in transit, interpolated along the straight line between the coordinates each move reported. The lines themselves were not drawn by hand: they are the routes parts actually took, read off the trace."
+
+[[animation]]
+id = "Example03GridEpidemic"
+blurb = "A susceptible-infected-recovered epidemic spreading across a 20×20 grid whose edges wrap."
+watchFor = "Colour is the state of an individual, not its identity. Watch infection cross the seam at the edge of the grid — on a torus the far side is a neighbour, so an outbreak that reaches the boundary does not stop there."
+
+[[animation]]
+id = "Example04BuildingEvacuation"
+blurb = "Occupants leaving a building laid out as a grid of rooms and corridors, routing around walls to reach an exit."
+watchFor = "The dark cells are blocked and the agents path around them. Nobody told the animation where the walls are: the grid geometry comes from the model, so the picture cannot disagree with what the pathfinder believes."
+
+[[animation]]
+id = "Example05PedestrianCrowd"
+blurb = "A crowd emptying a room through a doorway three cells wide."
+watchFor = "The green-to-red wash is the flow field — the model's own gradient towards the exit, with green near it. The crowding at the door is not scripted; it is what happens when everyone follows that gradient at once."
+
+[[animation]]
+id = "Example06WarehouseAGV"
+blurb = "Four automated guided vehicles share one warehouse floor. A task is announced, the vehicles bid for it, and the winner fetches the pallet."
+watchFor = "The amber aisle is congested — passable, but four times the cost to cross. Watch the blue routes prefer the western cross-aisle instead. That is the grid's cell costs deciding, not the drawing. Colour shows what a vehicle is doing rather than which one it is."
+
+[[animation]]
+id = "Example08ConveyorTandem"
+blurb = "Parts ride a belt between an entrance, two work stations and an exit."
+watchFor = "Each square is one cell of the conveyor and fills when a part occupies it, so the belt displays its own load. Cells are a resource in their own right: a part that cannot get on waits at the entry, and the queue at station 2 is what happens when the far end cannot keep up."
+
+[[animation]]
+id = "Example09DistancesTandem"
+blurb = "The same walk as the moving-parts example, on a model that has no coordinates at all."
+watchFor = "Its moves report NaN positions and the names of the places they run between. The layout supplies a position for each name — here from the model's own distance matrix, turned so the process reads left to right — and every move resolves against those. Spatial detail is a property of the drawing, not a requirement of the model."
+
+[[animation]]
+id = "Example11Flocking"
+blurb = "Eighty boids steering by separation, alignment and cohesion on a world whose edges join."
+watchFor = "Follow one boid off the side of the world and back on the other. The space is a torus, so the renderer draws the short way across the seam rather than streaking the whole width. The arrows are each agent's velocity and the force steering it."
+
+[[animation]]
+id = "Example12StemFairStorage"
+blurb = "Students walking a five-location STEM fair, and the delays that hold them once they arrive."
+watchFor = "The line is the corridor and the dots on it are students in transit, but the fair is in the room below. Where they stop is a bare delay with no geometry of its own — a storage bound to that delay's name is what draws it. A conversation runs about eighteen minutes against a few seconds of walking, so almost everyone is standing still."
+
+[[animation]]
+id = "Example13MovableResources"
+blurb = "A test and repair shop where three transport workers carry parts between stations."
+watchFor = "Parts flow left to right, diagnostics through tests to repair, and the triangles are the workers. Station spacing is the model's own distance matrix rather than an arrangement someone chose, so what you see is the geometry the simulation actually used."
+
+[[animation]]
+id = "Example14AnnotatedClinic"
+blurb = "A clinic where ordinary patients and VIPs queue together but are drawn apart."
+watchFor = "Blue circles are ordinary patients, red triangles are VIPs. The application knew both classes existed before the model was ever run — they are declared with entityType and the processes carry an annotation — so they appeared in the styling list ready to be given a look, rather than being discovered from a trace after the fact."
+
+[[animation]]
+id = "Example15DroneDelivery"
+blurb = "Delivery drones working a three-dimensional airspace, shown in plan view."
+watchFor = "Altitude rides in the trace even though the picture is flat. Drones at different heights pass over one another without interacting, which is the point: the flattening is a choice the layout makes, not information the model lost."
+
+[[animation]]
+id = "Example17TandemBlocking"
+blurb = "Two stages separated by a buffer with room for exactly one part — the classic blocking model."
+watchFor = "A part must take the buffer before releasing stage 1, and take stage 2 before releasing the buffer. So when the buffer is full, stage 1 finishes its work and then simply stands there holding the part: blocked, not busy. Watch how much of stage 1's time goes that way."
+
+[[animation]]
+id = "Example18ConveyorTestRepair"
+blurb = "The same job shop as the movable-resource version, with the transport replaced by an accumulating loop belt."
+watchFor = "Each part rides to whichever station its test plan calls for next, but the belt runs one way. A part that wants the station it just left rides 130 cells all the way round to reach it — the cost of a loop, made visible."

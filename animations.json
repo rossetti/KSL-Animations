@@ -1,0 +1,139 @@
+{
+  "animations": [
+    {
+      "id": "Example01DriveThroughPharmacy",
+      "title": "Drive-through pharmacy — one queue, one server",
+      "blurb": "The smallest interesting queueing model: cars arrive, wait in one line, and are served by whichever pharmacist is free.",
+      "watchFor": "Nothing moves. Position carries no meaning here — only occupancy. A red cell is a pharmacist serving a car, green is one free, and the line to the left is the queue. This is what a process-view model looks like when the animation is about state rather than travel.",
+      "page": "a/Example01DriveThroughPharmacy.html",
+      "trace": "traces/Example01DriveThroughPharmacy.atf.gz",
+      "traceBytes": 81086
+    },
+    {
+      "id": "Example02MovingParts",
+      "title": "Moving parts — walking between two stations",
+      "blurb": "A part walks from the entrance to each station in turn, and out again.",
+      "watchFor": "The dots on the grey lines are parts in transit, interpolated along the straight line between the coordinates each move reported. The lines themselves were not drawn by hand: they are the routes parts actually took, read off the trace.",
+      "page": "a/Example02MovingParts.html",
+      "trace": "traces/Example02MovingParts.atf.gz",
+      "traceBytes": 18311
+    },
+    {
+      "id": "Example03GridEpidemic",
+      "title": "SIR epidemic on a 20x20 grid torus",
+      "blurb": "A susceptible-infected-recovered epidemic spreading across a 20×20 grid whose edges wrap.",
+      "watchFor": "Colour is the state of an individual, not its identity. Watch infection cross the seam at the edge of the grid — on a torus the far side is a neighbour, so an outbreak that reaches the boundary does not stop there.",
+      "page": "a/Example03GridEpidemic.html",
+      "trace": "traces/Example03GridEpidemic.atf.gz",
+      "traceBytes": 37846
+    },
+    {
+      "id": "Example04BuildingEvacuation",
+      "title": "Building evacuation on a grid",
+      "blurb": "Occupants leaving a building laid out as a grid of rooms and corridors, routing around walls to reach an exit.",
+      "watchFor": "The dark cells are blocked and the agents path around them. Nobody told the animation where the walls are: the grid geometry comes from the model, so the picture cannot disagree with what the pathfinder believes.",
+      "page": "a/Example04BuildingEvacuation.html",
+      "trace": "traces/Example04BuildingEvacuation.atf.gz",
+      "traceBytes": 7340
+    },
+    {
+      "id": "Example05PedestrianCrowd",
+      "title": "Crowd evacuating a room through a three-cell doorway",
+      "blurb": "A crowd emptying a room through a doorway three cells wide.",
+      "watchFor": "The green-to-red wash is the flow field — the model's own gradient towards the exit, with green near it. The crowding at the door is not scripted; it is what happens when everyone follows that gradient at once.",
+      "page": "a/Example05PedestrianCrowd.html",
+      "trace": "traces/Example05PedestrianCrowd.atf.gz",
+      "traceBytes": 360966
+    },
+    {
+      "id": "Example06WarehouseAGV",
+      "title": "Warehouse AGVs — bidding, fetching, charging",
+      "blurb": "Four automated guided vehicles share one warehouse floor. A task is announced, the vehicles bid for it, and the winner fetches the pallet.",
+      "watchFor": "The amber aisle is congested — passable, but four times the cost to cross. Watch the blue routes prefer the western cross-aisle instead. That is the grid's cell costs deciding, not the drawing. Colour shows what a vehicle is doing rather than which one it is.",
+      "page": "a/Example06WarehouseAGV.html",
+      "trace": "traces/Example06WarehouseAGV.atf.gz",
+      "traceBytes": 105084
+    },
+    {
+      "id": "Example08ConveyorTandem",
+      "title": "Tandem queue with a conveyor — parts ride between stations",
+      "blurb": "Parts ride a belt between an entrance, two work stations and an exit.",
+      "watchFor": "Each square is one cell of the conveyor and fills when a part occupies it, so the belt displays its own load. Cells are a resource in their own right: a part that cannot get on waits at the entry, and the queue at station 2 is what happens when the far end cannot keep up.",
+      "page": "a/Example08ConveyorTandem.html",
+      "trace": "traces/Example08ConveyorTandem.atf.gz",
+      "traceBytes": 631006
+    },
+    {
+      "id": "Example09DistancesTandem",
+      "title": "Tandem queue on a distance model — named places, no coordinates",
+      "blurb": "The same walk as the moving-parts example, on a model that has no coordinates at all.",
+      "watchFor": "Its moves report NaN positions and the names of the places they run between. The layout supplies a position for each name — here from the model's own distance matrix, turned so the process reads left to right — and every move resolves against those. Spatial detail is a property of the drawing, not a requirement of the model.",
+      "page": "a/Example09DistancesTandem.html",
+      "trace": "traces/Example09DistancesTandem.atf.gz",
+      "traceBytes": 54322
+    },
+    {
+      "id": "Example11Flocking",
+      "title": "Flocking on a torus",
+      "blurb": "Eighty boids steering by separation, alignment and cohesion on a world whose edges join.",
+      "watchFor": "Follow one boid off the side of the world and back on the other. The space is a torus, so the renderer draws the short way across the seam rather than streaking the whole width. The arrows are each agent's velocity and the force steering it.",
+      "page": "a/Example11Flocking.html",
+      "trace": "traces/Example11Flocking.atf.gz",
+      "traceBytes": 1864472
+    },
+    {
+      "id": "Example12StemFairStorage",
+      "title": "STEM Fair Mixer — students walking a venue, and the delays that hold them",
+      "blurb": "Students walking a five-location STEM fair, and the delays that hold them once they arrive.",
+      "watchFor": "The line is the corridor and the dots on it are students in transit, but the fair is in the room below. Where they stop is a bare delay with no geometry of its own — a storage bound to that delay's name is what draws it. A conversation runs about eighteen minutes against a few seconds of walking, so almost everyone is standing still.",
+      "page": "a/Example12StemFairStorage.html",
+      "trace": "traces/Example12StemFairStorage.atf.gz",
+      "traceBytes": 160488
+    },
+    {
+      "id": "Example13MovableResources",
+      "title": "Test & repair shop — workers carrying parts between stations",
+      "blurb": "A test and repair shop where three transport workers carry parts between stations.",
+      "watchFor": "Parts flow left to right, diagnostics through tests to repair, and the triangles are the workers. Station spacing is the model's own distance matrix rather than an arrangement someone chose, so what you see is the geometry the simulation actually used.",
+      "page": "a/Example13MovableResources.html",
+      "trace": "traces/Example13MovableResources.atf.gz",
+      "traceBytes": 52345
+    },
+    {
+      "id": "Example14AnnotatedClinic",
+      "title": "Annotated clinic — declared entity types, styled apart",
+      "blurb": "A clinic where ordinary patients and VIPs queue together but are drawn apart.",
+      "watchFor": "Blue circles are ordinary patients, red triangles are VIPs. The application knew both classes existed before the model was ever run — they are declared with entityType and the processes carry an annotation — so they appeared in the styling list ready to be given a look, rather than being discovered from a trace after the fact.",
+      "page": "a/Example14AnnotatedClinic.html",
+      "trace": "traces/Example14AnnotatedClinic.atf.gz",
+      "traceBytes": 8867
+    },
+    {
+      "id": "Example15DroneDelivery",
+      "title": "Drone delivery — a 3D airspace in plan view",
+      "blurb": "Delivery drones working a three-dimensional airspace, shown in plan view.",
+      "watchFor": "Altitude rides in the trace even though the picture is flat. Drones at different heights pass over one another without interacting, which is the point: the flattening is a choice the layout makes, not information the model lost.",
+      "page": "a/Example15DroneDelivery.html",
+      "trace": "traces/Example15DroneDelivery.atf.gz",
+      "traceBytes": 76620
+    },
+    {
+      "id": "Example17TandemBlocking",
+      "title": "Tandem queue with blocking — one buffer space between two stations",
+      "blurb": "Two stages separated by a buffer with room for exactly one part — the classic blocking model.",
+      "watchFor": "A part must take the buffer before releasing stage 1, and take stage 2 before releasing the buffer. So when the buffer is full, stage 1 finishes its work and then simply stands there holding the part: blocked, not busy. Watch how much of stage 1's time goes that way.",
+      "page": "a/Example17TandemBlocking.html",
+      "trace": "traces/Example17TandemBlocking.atf.gz",
+      "traceBytes": 79773
+    },
+    {
+      "id": "Example18ConveyorTestRepair",
+      "title": "Test & repair shop — parts riding a loop conveyor",
+      "blurb": "The same job shop as the movable-resource version, with the transport replaced by an accumulating loop belt.",
+      "watchFor": "Each part rides to whichever station its test plan calls for next, but the belt runs one way. A part that wants the station it just left rides 130 cells all the way round to reach it — the cost of a loop, made visible.",
+      "page": "a/Example18ConveyorTestRepair.html",
+      "trace": "traces/Example18ConveyorTestRepair.atf.gz",
+      "traceBytes": 367310
+    }
+  ]
+}

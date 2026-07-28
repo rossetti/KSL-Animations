@@ -1,0 +1,24 @@
+# Note what is NOT here: traces/, posters/, a/*.html, animations.json and assets/ksl-animation.js are all
+# generated, and all committed on purpose. This repository IS the published site — GitHub Pages serves
+# these files straight from the branch, so anything ignored here is simply missing from the site.
+#
+# Regenerate them from a KSL checkout with:
+#     ./gradlew -p KSLAnimationCore jsBrowserProductionWebpack
+#     ./gradlew buildAnimationSite -Pout=../KSL-Animations
+
+# macOS / Windows / Linux desktop droppings
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local scratch: somewhere to drop a trace or a page while trying something, without it reaching the site.
+scratch/

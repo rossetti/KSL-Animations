@@ -1,0 +1,132 @@
+/*
+ * KSL Animations — site styles.
+ *
+ * Hand-authored. The build never writes this file.
+ *
+ * The palette is the KSL brand palette, taken from docs/branding/README.md in the KSL repository, and the
+ * names are the ones used there so the two can be compared without translation. Light only, by decision:
+ * the animation canvas renders on white in both the desktop viewer and the browser, and the example
+ * layouts were coloured against white, so a dark page around a white canvas would misrepresent the thing
+ * it is framing.
+ *
+ * No web fonts. The system stack renders immediately, costs no request, and reaches no third party.
+ */
+
+:root {
+    --indigo: #4338CA;
+    --indigo-light: #C7D2FE;
+    --amber: #F59E0B;
+    --deep: #1E1B4B;
+    --ink: #111827;
+    --navy: #0F172A;
+    --muted: #6B7280;
+    --line: #E5E7EB;
+    --paper: #FFFFFF;
+
+    --measure: 68ch;          /* a comfortable line length for prose */
+    --gutter: clamp(1rem, 4vw, 2.5rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--gutter);
+}
+
+/* ── header ─────────────────────────────────────────────────────────────────────────────────────── */
+
+header.site {
+    border-bottom: 1px solid var(--line);
+}
+
+header.site .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-block: 1.25rem;
+}
+
+header.site img { display: block; width: 200px; height: auto; }
+
+nav.site a {
+    color: var(--indigo);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 1.25rem;
+}
+
+nav.site a:hover { text-decoration: underline; }
+
+/* ── prose ──────────────────────────────────────────────────────────────────────────────────────── */
+
+h1 {
+    font-size: clamp(1.9rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.6em;
+    color: var(--deep);
+}
+
+h2 {
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 2.5rem 0 0.6rem;
+    color: var(--deep);
+}
+
+p { max-width: var(--measure); }
+
+.lede {
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    color: var(--muted);
+}
+
+a { color: var(--indigo); }
+
+/* A short amber rule under a heading — the accent the brand reserves for events. */
+.rule {
+    width: 3.5rem;
+    height: 3px;
+    background: var(--amber);
+    border: 0;
+    margin: 0 0 1.75rem;
+}
+
+/* ── notice ─────────────────────────────────────────────────────────────────────────────────────── */
+
+.notice {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--amber);
+    background: #FFFBEB;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    max-width: var(--measure);
+}
+
+.notice :first-child { margin-top: 0; }
+.notice :last-child { margin-bottom: 0; }
+
+/* ── footer ─────────────────────────────────────────────────────────────────────────────────────── */
+
+footer.site {
+    border-top: 1px solid var(--line);
+    margin-top: 4rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+footer.site .wrap { padding-block: 1.5rem; }
+footer.site p { max-width: none; }

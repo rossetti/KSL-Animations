@@ -1,0 +1,98 @@
+<!doctype html>
+<!--
+  PHASE 0 SPIKE — delete this whole directory once the question below is answered.
+
+  THE QUESTION: does GitHub Pages serve a `.gz` file with `Content-Encoding: gzip`?
+
+  If it does, fetch() transparently decompresses the body, and the player's own DecompressionStream then
+  runs over already-plain text and fails. That would sink the plan's size argument, which rests on serving
+  traces gzipped: all fifteen come to 3.5 MB compressed against 39.1 MB raw.
+
+  Two players below, the same run through the same layout, differing only in which file they fetch. Whatever
+  happens, the pair tells us what to do:
+
+    both play        -> serve traces gzipped. Proceed as planned.
+    only .atf plays  -> Pages is decompressing for us. Fall back to uncompressed traces (39 MB, still well
+                        inside Pages' limits) or to an extension Pages does not treat as compressed.
+    neither plays    -> something unrelated is wrong; the spike itself is at fault, not the question.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phase 0 spike — gzipped traces over GitHub Pages</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <style>
+        .verdict { font-weight: 600; }
+        .pass { color: #15803D; }
+        .fail { color: #B91C1C; }
+        .pending { color: var(--muted); }
+        .player { height: 340px; border: 1px solid var(--line); border-radius: 6px; }
+    </style>
+</head>
+<body>
+
+<main class="wrap">
+    <h1>Phase 0 spike</h1>
+    <hr class="rule">
+    <p class="lede">
+        The same run, twice: once fetched gzipped, once fetched plain. If both animate, traces can ship
+        compressed and the whole gallery costs about 4 MB.
+    </p>
+
+    <h2>1 — gzipped (<code>clinic.atf.gz</code>, 8.4 KB)</h2>
+    <p class="verdict pending" id="v-gz">waiting…</p>
+    <div class="player" id="p-gz"
+         data-ksl-trace="clinic.atf.gz"
+         data-ksl-layout="clinic.lay.toml"></div>
+
+    <h2>2 — uncompressed (<code>clinic.atf</code>, 102 KB)</h2>
+    <p class="verdict pending" id="v-raw">waiting…</p>
+    <div class="player" id="p-raw"
+         data-ksl-trace="clinic.atf"
+         data-ksl-layout="clinic.lay.toml"></div>
+
+    <h2>What the page decided</h2>
+    <p class="verdict pending" id="v-all">waiting…</p>
+</main>
+
+<script src="../assets/ksl-animation.js"></script>
+<script>
+    // A player that loaded draws to a canvas it created inside its mount point; one that failed leaves the
+    // element empty or shows an error in its status line. Checking for the canvas is the least clever test
+    // available, which is what a spike wants.
+    function drew(id) {
+        var el = document.getElementById(id);
+        var c = el && el.querySelector('canvas');
+        if (!c || !c.width || !c.height) return false;
+        var d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+        for (var i = 0; i < d.length; i += 4) {
+            if (d[i] < 250 || d[i + 1] < 250 || d[i + 2] < 250) return true; // something other than blank
+        }
+        return false;
+    }
+
+    function say(id, ok, okText, badText) {
+        var el = document.getElementById(id);
+        el.textContent = ok ? '✓ ' + okText : '✗ ' + badText;
+        el.className = 'verdict ' + (ok ? 'pass' : 'fail');
+    }
+
+    // Generous: the traces are small, but a cold Pages fetch plus decompression plus the first frame is
+    // still several hundred milliseconds, and a false negative here would be worse than waiting.
+    setTimeout(function () {
+        var gz = drew('p-gz'), raw = drew('p-raw');
+        say('v-gz', gz, 'played — the browser decompressed it', 'did not play');
+        say('v-raw', raw, 'played', 'did not play');
+
+        var el = document.getElementById('v-all'), cls = 'verdict ', msg;
+        if (gz && raw) { cls += 'pass'; msg = '✓ Serve traces gzipped. Proceed as planned — the gallery costs about 4 MB.'; }
+        else if (raw)  { cls += 'fail'; msg = '✗ Pages is decompressing .gz for us. Fall back to uncompressed traces (39 MB) or a different extension.'; }
+        else           { cls += 'fail'; msg = '✗ Neither played — the spike itself is broken, so this says nothing about Pages. Check the console.'; }
+        el.textContent = msg;
+        el.className = cls;
+    }, 4000);
+</script>
+
+</body>
+</html>

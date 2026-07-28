@@ -192,9 +192,17 @@ a { color: var(--indigo); }
  * the page — the frame says "this is the model", and keeps that surface honest whatever the page around it
  * does later.
  */
+/*
+ * The height follows the animation's own shape. The player measures the model and publishes its ratio as
+ * --ksl-aspect on this element, because a box of a fixed height has no idea what is going into it: a wide
+ * model in a tall window fitted to the width and left a third of the frame empty underneath. max-height
+ * still governs how large it may get on a big screen, and the fallback ratio covers the moment before the
+ * trace has loaded.
+ */
 .player {
-    height: min(70vh, 560px);
-    min-height: 380px;
+    aspect-ratio: var(--ksl-aspect, 8 / 5);
+    max-height: min(70vh, 560px);
+    min-height: 320px;
     margin: 1.75rem 0 2.5rem;
     background: var(--paper);
     border: 1px solid var(--line);

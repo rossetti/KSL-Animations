@@ -63,6 +63,16 @@
                 card.className = 'card';
                 card.href = a.page;
 
+                // Posters are rendered by a separate task, so a card must survive one being absent rather
+                // than showing a broken-image glyph: the text alone is a complete card.
+                var shot = document.createElement('img');
+                shot.className = 'shot';
+                shot.src = 'assets/posters/' + a.id + '.png';
+                shot.alt = '';
+                shot.loading = 'lazy';
+                shot.onerror = function () { shot.remove(); };
+                card.appendChild(shot);
+
                 var h = document.createElement('h2');
                 h.textContent = a.title;
 

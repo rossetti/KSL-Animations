@@ -191,8 +191,7 @@ a { color: var(--indigo); }
  * colored against white. So the animation is framed as a sheet it sits on rather than being blended into
  * the page — the frame says "this is the model", and keeps that surface honest whatever the page around it
  * does later.
- */
-/*
+ *
  * The height follows the animation's own shape. The player measures the model and publishes its ratio as
  * --ksl-aspect on this element, because a box of a fixed height has no idea what is going into it: a wide
  * model in a tall window fitted to the width and left a third of the frame empty underneath. max-height
@@ -221,13 +220,31 @@ a { color: var(--indigo); }
 
 .card {
     display: block;
-    padding: 1.25rem 1.4rem;
+    padding: 0 0 1.25rem;
+    overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 8px;
     color: inherit;
     text-decoration: none;
     transition: border-color .12s ease, transform .12s ease;
 }
+
+/*
+ * A frame from the middle of the run, chosen for having something in it. `cover` crops rather than
+ * letterboxes: the posters are already trimmed to their content, so their proportions differ from model to
+ * model, and a row of cards with white bands of varying height reads as a mistake.
+ */
+.card .shot {
+    display: block;
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    object-position: left top;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+}
+
+.card > :not(.shot) { margin-inline: 1.4rem; }
 
 .card:hover {
     border-color: var(--indigo);
@@ -236,7 +253,7 @@ a { color: var(--indigo); }
 
 /* The heading is a card title here, not a section break, so it drops the page-level spacing. */
 .card h2 {
-    margin: 0 0 0.4rem;
+    margin: 1.1rem 0 0.4rem;
     font-size: 1.05rem;
     line-height: 1.3;
     color: var(--indigo);
